@@ -1,7 +1,9 @@
 # MyToolKit
 1.本工具包括5个模块：
 easy_search.py,my_bing_domains_v1_alone.py,my_GoogleScraper_bing_domain.py,mysqlmap.py,MyToolKit.py。
+
 2.各模块介绍：
+
   1>easy_search.py：
     google关键字搜索相关网页结果，并对结果通过sqlmap注入，类似啊D里的搜索注入功能，但比啊D里强大，因为这里用sqlmap检测注入并注入,其中google搜索的功能采用完全模仿浏览器方式，可得到所有通过浏览器Google搜索的结果，通过GoogleScraper模块实现，其中GoogleScraper
     利用Selenium模块模拟浏览器人工访问功能。
