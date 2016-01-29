@@ -21,7 +21,7 @@ def usage():
 def get_pure_list(list):
     pure_list=[]
     for each in list:
-        each=re.sub(r'(https://)|(http://)|(\s)|(/.*)',"",each)
+        each=re.sub(r'(https://)|(http://)|(\s)|(/.*)|(:.*)',"",each)
         pure_list.append(each)
         #re.sub(r'\r\n',"",each)
         #re.sub(r'\n',"",each)

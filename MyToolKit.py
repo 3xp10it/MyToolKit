@@ -37,7 +37,9 @@ input your number here:>''',end='')
 
 
 	if num==2:
-		print("input your targets path here:>",end='')
+		print('''input your targets path here,the name has to be "targets.txt",
+if your target file is not "targets.txt",you'd better change its file name to "targets.txt",
+otherwise you need to change the source code :>''',end='')
 		targets=input()
 		print('''there are three kinds of sqli blew:
 1.use "sqlmap_crawl" 
@@ -103,4 +105,4 @@ input your number here:''',end='')
 		os.system('''/root/myenv/bin/python3.5 easy_search.py "%s"''' % keyword)
 		mysqlmap.sqlmap_g_human("GoogleScraper_origin_http_domain_url_list.txt",bool_tor)
 		pass
-
+	os.system('/usr/bin/python2.7 mail.py')
