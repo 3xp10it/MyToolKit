@@ -1,5 +1,6 @@
 # MyToolKit
 1.本工具包括5个模块：
+
 easy_search.py,my_bing_domains_v1_alone.py,my_GoogleScraper_bing_domain.py,mysqlmap.py,MyToolKit.py。
 
 2.各模块介绍：
@@ -10,9 +11,11 @@ easy_search.py,my_bing_domains_v1_alone.py,my_GoogleScraper_bing_domain.py,mysql
 
   2>my_bing_domains_v1_alone.py：
     通过bing的api接口原理实现，需要注册bing的api_key，每个月免费5000次。
+    
   3>my_GoogleScraper_bing_domain.py：通过GoogleScraper的浏览器模拟人工访问bing，关键字ip：111.111.111.111,获取所有结果，当只有一页结果
     时，GoogleScraper不能得到该查询结果，调用上面的my_bing_domains_v1_alone.py模块继续查询。                                                            
   4>mysqlmap.py：sqlmap自动化sqli模块，详情见代码。
+  
   5>MyToolKit.py：综合入口模块，选择不同需求，实现不同功能。共包括8个功能，分别为：
           --exp:批量使用exp功能
                   --mygoogle
@@ -34,14 +37,25 @@ easy_search.py,my_bing_domains_v1_alone.py,my_GoogleScraper_bing_domain.py,mysql
   百度网盘链接：http://pan.baidu.com/s/1kUklzZD 密码: 4cpn
   
 2016.1.26部分代码更新
+
 2016.1.28部分代码更新
+
   添加tor匿名功能，可自由选择tor或不用tor
+  
 2016.1.28部分代码更新，增加功能：
+
   1.绕过“多次错误访问后屏蔽所有请求”
+  
   2.请求延时
+  
   3.尝试绕过waf
+  
   4.支持post注入
+  
 2016.1.29部分代码更新，增加功能：
+
   1.定位旁站的sqli所在主站
+  
   2.发送邮件通知功能，将可用sqli的url发送邮件通知（smtp用163）
+  
    
