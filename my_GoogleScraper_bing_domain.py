@@ -3,6 +3,11 @@
 #coz bing does not need supass yanzhengma
 #on this computer is "workon virtualenv2"
 #/root/myenv2/bin/python3.5m
+#
+#
+##/root/myenv2/bin/python3.5m is the normal python3
+#/root/myenv/bin/python3.5 is the changed GoogleScraper script version python
+
 import socket
 import re
 import sys
@@ -78,7 +83,11 @@ def getIp(domain):
 
 #start from here actually if there is a main entrance
 
-def myGoogleScraperbingdomains():    
+def myGoogleScraperbingdomains():
+    print('''make sure your ip will be recognized as useful ip to visit www.bing.com
+ otherwise,you need use a vpn which will be treated as a ip can visit www.bing.com and
+ will not turn you to cn.bing.com from www.bing.com,another way is use torbrowser instead
+ of firefox explorer''')
     if len(sys.argv)!=2 and sys.argv[1]!='-f':
         usage()
         sys.exit(0)
@@ -124,6 +133,11 @@ def myGoogleScraperbingdomains():
         	is ok,coz take no effects,input one of {firefox,chrome,phantomjs} here:")
         browser=input()
         get_the_one_target_domains(sharedHost,keyword,num_page,method,browser)
+    
+    os.system('''ps -aux | grep firefox | awk '{print $2}'| xargs kill -9''')
+
+
+
 
 def get_the_one_target_domains(sharedHost,keyword,num_page,method,browser):
 	sharedHost=sharedHost

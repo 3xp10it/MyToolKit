@@ -2,6 +2,10 @@
 # make sure your MyToolKit folder has only target file,and make its
 # ext 'targets.txt',otherwise you should change the source code to make it 
 # good to use.
+# 
+# #/root/myenv2/bin/python3.5m is the normal python3
+#/root/myenv/bin/python3.5 is the changed GoogleScraper script version python
+#
 import smtplib
 from email.mime.text import MIMEText
 from email.header import Header
@@ -17,9 +21,9 @@ def sendMail(mailto,subject,body,format='plain'):
 
     #host,user,password,fromMail = smtpInfo
     host='smtp.163.com'
-    user='xxxxx'
-    password='xxxxx'
-    fromMail='xxxx'
+    user='xxxxxxxxxxx@163.com'
+    password='xxxxxxxxx'
+    fromMail='xxxxxxxxxxxxx'
 
     if isinstance(body,unicode) is True:
         body=str(body)
@@ -67,6 +71,7 @@ def get_result_from_folder(folder):
 	os.system("ls %s/*.csv > csv_file_list.txt" % folder)
 	f=open("csv_file_list.txt","r+")
 	list=f.readlines()
+	f.close()
 	os.system("rm csv_file_list.txt")
 	final_list=[]
 	for each in list:
@@ -81,7 +86,6 @@ def get_result_from_folder(folder):
 
 
 def getIp(domain):    
-    #the below function getaddrinfo may not be good as function gethostbyname
     try:
     	myaddr=socket.getaddrinfo(domain,'http')[0][4][0]
     	return myaddr
@@ -141,10 +145,10 @@ def get_msg_to_send():
 
 def main():
 	msg=get_msg_to_send()
-	#print 66666666666666666666666666666666666
-	sendMail('xxxxx1','annoymous',msg)
-	sendMail('xxxxxx2','annoymous',msg)
-	sendMail('xxxxxxxxx3','annoymous',msg)
+	print 66666666666666666666666666666666666
+	sendMail('xxxxxxxxxxx@qq.com','annoymous',msg)
+	sendMail('xxxxxxxxxxxxxxxx@qq.com','annoymous',msg)
+	sendMail('xxxxxxxxxxxxxxxxxxxx@163.com','annoymous',msg)
 
 
 if __name__ == '__main__':

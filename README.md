@@ -57,5 +57,14 @@ easy_search.py,my_bing_domains_v1_alone.py,my_GoogleScraper_bing_domain.py,mysql
   1.定位旁站的sqli所在主站
   
   2.发送邮件通知功能，将可用sqli的url发送邮件通知（smtp用163）
+
+2016.3.2部分代码更新：
+1.easy_search.py line:116 添加自动结束冗余firefox进程功能
+２.修改mysqlmap.py中line:131-161的逻辑错误
+３.修改其它py中fp=open()以后没有fp.close()的错误
+４.修改MyToolKit.py中对easy_search.py调用的逻辑错误
+５.关键字由php|asp变成php|asp|aspx|jsp
+６.修改my_bing_domains_v1_alone.py中get_the_one_target_domains函数使用遇到不工作的域名解析异常使全局出错的错误 line:21-22
+７.自动处理output目录移动，使得运行前不必清空output目录
   
    

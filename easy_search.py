@@ -3,6 +3,18 @@
 #easy_search.py is stronger than combineGoogleScraper_myurlhandle.py
 #coz the latter can get the http_url only while easy_search.py can get 
 #the three kinds of url_list and txt
+#
+#
+##/root/myenv2/bin/python3.5m is the normal python3
+#/root/myenv/bin/python3.5 is the changed GoogleScraper script version python
+#
+#function:
+#this script get the GoogleScraper_origin_http_domain_url_list.txt 
+#that is a file with urls which can be directly thrown into sqlmap to start
+#dig sqli(s),and the urls are from google search,eg.
+#when you run easy_search.py,you need supply keyword for google search,
+#then the result is those urls from this google search,the result file is 
+#GoogleScraper_origin_http_domain_url_list.txt. 
 import sys
 def save_url_to_file(url_list,name):
     file=open(name,"a+")
@@ -109,6 +121,15 @@ def myGoogleScraper_get_urls_from_query(query,want):
 	all_three_list.append(GoogleScraper_domain_list)
 	all_three_list.append(GoogleScraper_http_domain_list)
 	all_three_list.append(GoogleScraper_origin_http_domain_url_list)
+
+	import os
+	#although os.system("pkill firefox") maybe ok,
+	#this is a good chance to learn awk&xargs,meanwhile,
+	#os.system("pkill firefox") is not ok here,but below is ok enough
+	#to kill all firefox when it lost into stuck.
+	os.system('''ps -aux | grep firefox | awk '{print $2}' | xargs kill -9''')
+	#os.system("pkill firefox")
+
 	if want=='GoogleScraper_domain_list.txt':
 		return all_three_list[0]
 	elif want=='GoogleScraper_http_domain_list':
