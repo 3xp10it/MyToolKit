@@ -11,11 +11,11 @@ import os
 import re 
 import mysqlmap
 while(True):
-	os.system('''mv -f ~/.sqlmap/output/* ~/.sqlmap/output_bak''')
 	print('''do you want use 'tor' service in your sqli action? sometimes when your network is not very well,
 is not a good idea to use tor,but when your targets has waf,use tor is better.
 input Y(y) or N(n) default [Y]:>''',end='')
 	choose=input()
+	os.system('''mv -f ~/.sqlmap/output/* ~/.sqlmap/output_bak''')
 	if choose=='N' or choose=='n':
 		bool_tor=False
 	else:
