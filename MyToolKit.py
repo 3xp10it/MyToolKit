@@ -132,7 +132,27 @@ input your number here:''',end='')
 			print("tor_forms_sqlmap_string is:%s" % tor_forms_sqlmap_string)
 			os.system("/usr/bin/python2.7 %s" % tor_sqlmap_string)
 			os.system("/usr/bin/python2.7 %s" % tor_forms_sqlmap_string)
-
+	if num==5:
+		print('''attention!!!
+once you choosed this function, make sure your "targets.txt" file has urls 
+like:http://xxx.xxx..or https://xxx.xxx..,
+but not xxx.xxx.xxx without url.scheme''')
+		print("input your targets path here:>",end='')
+		targets=input()
+		print('''there are three kinds of sqli blew:
+1.use "sqlmap_crawl" 
+2.use "sqlmap-g-nohuman"
+3.use "sqlmap-g-human
+input your number here:''',end='')
+		num=int(input())
+		if num==1:
+			mysqlmap.sqlmap_craw("targets.txt",bool_tor)
+		if num==2:
+			mysqlmap.sqlmap_g_nohuman("targets.txt",bool_tor)
+		if num==3:
+			mysqlmap.sqlmap_g_human("targets.txt",bool_tor)
+		elif num!=1 and num!=2 and num!=3:
+			print("choose number wrong")
 
 
 		pass
