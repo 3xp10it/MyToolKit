@@ -66,25 +66,25 @@ MyToolKit
 2016.1.26部分代码更新
 
 2016.1.28部分代码更新
-1.添加tor匿名功能，可自由选择tor或不用tor
+>1.添加tor匿名功能，可自由选择tor或不用tor
 
 2016.1.28部分代码更新，增加功能：
-1.绕过“多次错误访问后屏蔽所有请求”
-2.请求延时
-3.尝试绕过waf
-4.支持post注入
+>1.绕过“多次错误访问后屏蔽所有请求”
+>2.请求延时
+>3.尝试绕过waf
+>4.支持post注入
 
 2016.1.29部分代码更新，增加功能：
-1.定位旁站的sqli所在主站
-2.发送邮件通知功能，将可用sqli的url发送邮件通知（smtp用163）
+>1.定位旁站的sqli所在主站
+>2.发送邮件通知功能，将可用sqli的url发送邮件通知（smtp用163）
 
 2016.3.2部分代码更新：
-1.easy_search.py line:116 添加自动结束冗余firefox进程功能 
-2.修改mysqlmap.py中line:131-161的逻辑错误 
-3.修改其它py中fp=open()以后没有fp.close()的错误 
-4.修改MyToolKit.py中对easy_search.py调用的逻辑错误 
-5.关键字由php|asp变成php|asp|aspx|jsp 
-6.修改my_bing_domains_v1_alone.py中get_the_one_targe_domains函数使用遇到不工作的
-  域名解析异常使全局出错的错误 line:21-22 
-7.自动处理output目录移动，使得运行前不必清空output目录
-8.修改my_bing_domains_v1_alone.py中get_the_one_targe_domains函数
+>1.easy_search.py line:116 添加自动结束冗余firefox进程功能 
+>2.修改mysqlmap.py中line:131-161的逻辑错误 
+>3.修改其它py中fp=open()以后没有fp.close()的错误 
+>4.修改MyToolKit.py中对easy_search.py调用的逻辑错误 
+>5.关键字由php|asp变成php|asp|aspx|jsp 
+>6.修改my_bing_domains_v1_alone.py中get_the_one_targe_domains函数使用遇到不工作的
+>  域名解析异常使全局出错的错误 line:21-22 
+>7.自动处理output目录移动，使得运行前不必清空output目录
+>8.修改my_bing_domains_v1_alone.py中get_the_one_targe_domains函数
