@@ -13,10 +13,10 @@ MyToolKit
 2.各模块介绍：
 ------------
 1>easy_search.py： 
-  google关键字搜索相关网页结果，并对结果通过sqlmap注入，类似啊D里的搜索注入功能，但
-  比啊D里强大，因为这里用sqlmap检测注入并注入,其中google搜索的功能采用完全模仿浏览
-  器方式，可得到所有通过浏览器Google搜索的结果，通过GoogleScraper模块实现，其中Goog
-  leScraper利用Selenium模块模拟浏览器人工访问功能。
+            google关键字搜索相关网页结果，并对结果通过sqlmap注入，类似啊D里的搜索注入功能，但
+            比啊D里强大，因为这里用sqlmap检测注入并注入,其中google搜索的功能采用完全模仿浏览
+            器方式，可得到所有通过浏览器Google搜索的结果，通过GoogleScraper模块实现，其中Goog
+            leScraper利用Selenium模块模拟浏览器人工访问功能。
 
 2>my_bing_domains_v1_alone.py：  
   通过bing的api接口原理实现，需要注册bing的api_key，每个月免费5000次。
