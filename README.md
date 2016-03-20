@@ -3,12 +3,12 @@ MyToolKit
 
 1.本工具包括6个模块：
 ---------
-  easy_search.py,
-  my_bing_domains_v1_alone.py,
-  my_GoogleScraper_bing_domain.py,
-  mysqlmap.py,
-  MyToolKit.py,
-  mail.py
+      easy_search.py,
+      my_bing_domains_v1_alone.py,
+      my_GoogleScraper_bing_domain.py,
+      mysqlmap.py,
+      MyToolKit.py,
+      mail.py
 
 2.各模块介绍：
 ------------
@@ -61,6 +61,7 @@ MyToolKit
   自动发送邮件，内嵌在MytoolKit.py中.
 
 3.环境要求： 
+------------
   安装GoogleScraper（python3下），并修改部分GoogleScraper中第三方模块selenium中代
   码(绕过验证码)可参考以前一篇写的关于google search api for python的文章.90sec链接
   https://forum.90sec.org/forum.php?mod=viewthread&tid=9024 度网盘链接：
