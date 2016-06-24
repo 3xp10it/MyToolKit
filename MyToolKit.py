@@ -10,21 +10,37 @@
 import os
 import re 
 import mysqlmap
-while(True):
+while(True):	
 	print('''do you want use 'tor' service in your sqli action? sometimes when your network is not very well,
 is not a good idea to use tor,but when your targets has waf,use tor is better.
 input Y(y) or N(n) default [Y]:>''',end='')
-	choose=input()
-	os.system('''mv -f ~/.sqlmap/output/* ~/.sqlmap/output_bak''')
-	if choose=='N' or choose=='n':
+	choose_tor=input()
+	if choose_tor=='N' or choose_tor=='n':
 		bool_tor=False
 	else:
 		bool_tor=True
+
+
+	print('''do you want use 'post' request in your sqli scan? sometimes when you want a faster speed,
+use 'get' request is enough,do no need to use 'post' request,meanwhile,when there exists some waf,
+use 'get' and 'post' will try too many times's request which will make the waf block you ip,so in these cases,do not use 'post' request,
+but use only 'get' request without 'post' request,the number of sqli points will be less in the common sense,
+input Y(y) or N(n) default [N]:>''',end='')
+	choose_post=input()
+	
+	if choose_post=='Y' or choose_post=='y':
+		post_or_not=True
+	else:
+		post_or_not=False
+		
+	os.system('''mv -f /root/.sqlmap/output/* /root/.sqlmap/output_bak''')
+
 	print('''there are several functions blew,chose the number of the list you want the script to do:
 1.for exp execution to the targets,your targets file should include the urls like "http://xxx.xxx.xxx/xx/" or "https://xxx.xxx.xxx/ etc."
 2.for sqli by mygoogle to search the domains in one ip
 3.for sqli by mybing to search the domains in one ip
 4.for sqli by google search<that is more than easy_search.py's function,but like "easy_search.py | sqlmap -m">
+5.sqli scan only url in targets.txt,without the urls's side domains(只扫targets.txt中的url,不扫旁站)
 input your number here:>''',end='')
 	num=int(input())
 	if num==1:
@@ -54,26 +70,26 @@ input your number here:''',end='')
 		num=int(input())
 		if num==1:
 			os.system("/root/myenv2/bin/python3.5m my_GoogleScraper_bing_domain.py -f %s" % targets)
-			mysqlmap.sqlmap_craw("GoogleScraper_bing_origin_http_domain_url_list.txt",bool_tor)
+			mysqlmap.sqlmap_craw("GoogleScraper_bing_origin_http_domain_url_list.txt",bool_tor,post_or_not)
 			try:
-				mysqlmap.sqlmap_craw("bing_origin_http_domain_url_list.txt",bool_tor)
+				mysqlmap.sqlmap_craw("bing_origin_http_domain_url_list.txt",bool_tor,post_or_not)
 			except:
 				pass
 		if num==2:
 			os.system("/root/myenv2/bin/python3.5m my_GoogleScraper_bing_domain.py -f %s" % targets)
-			mysqlmap.sqlmap_g_nohuman("GoogleScraper_bing_http_domain_list.txt",bool_tor)
+			mysqlmap.sqlmap_g_nohuman("GoogleScraper_bing_http_domain_list.txt",bool_tor,post_or_not)
 			try:
-				mysqlmap.sqlmap_g_nohuman("bing_http_domain_list.txt",bool_tor)	
+				mysqlmap.sqlmap_g_nohuman("bing_http_domain_list.txt",bool_tor,post_or_not)	
 			except:
 				pass
 		if num==3:
 			print('''!!!attention:all firefox process will be kill after easy_search''',end='')
 			os.system("/root/myenv2/bin/python3.5m my_GoogleScraper_bing_domain.py -f %s" % targets)
 			print("1111111111111111111success here")
-			mysqlmap.sqlmap_g_human("GoogleScraper_bing_http_domain_list.txt",bool_tor)
+			mysqlmap.sqlmap_g_human("GoogleScraper_bing_http_domain_list.txt",bool_tor,post_or_not)
 			print("2222222222222222222success here")
 			try:
-				mysqlmap.sqlmap_g_human("bing_http_domain_list.txt",bool_tor)
+				mysqlmap.sqlmap_g_human("bing_http_domain_list.txt",bool_tor,post_or_not)
 			except:
 				pass
 		elif num!=1 and num!=2 and num!=3:
@@ -93,15 +109,15 @@ input your number here:''',end='')
 		if num==1:
 			os.system("/usr/bin/python2.7 my_bing_domains_v1_alone.py %s" % targets)
 			print('''os.system("/usr/bin/python2.7 my_bing_domains_v1_alone.py %s" % targets) execute.''')
-			mysqlmap.sqlmap_craw("bing_origin_http_domain_url_list.txt",bool_tor)
+			mysqlmap.sqlmap_craw("bing_origin_http_domain_url_list.txt",bool_tor,post_or_not)
 		if num==2:
 			os.system("/usr/bin/python2.7 my_bing_domains_v1_alone.py %s" % targets)
 			print("/usr/bin/python2.7 my_bing_domains_v1_alone.py -f %s" % targets)
 			print("8888888888888success here")
-			mysqlmap.sqlmap_g_nohuman("bing_http_domain_list.txt",bool_tor)
+			mysqlmap.sqlmap_g_nohuman("bing_http_domain_list.txt",bool_tor,post_or_not)
 		if num==3:
 			os.system("/usr/bin/python2.7 my_bing_domains_v1_alone.py %s" % targets)
-			mysqlmap.sqlmap_g_human("bing_http_domain_list.txt",bool_tor)
+			mysqlmap.sqlmap_g_human("bing_http_domain_list.txt",bool_tor,post_or_not)
 		elif num!=1 and num!=2 and num!=3:
 			print("choose number wrong")
 
@@ -132,6 +148,7 @@ input your number here:''',end='')
 			print("tor_forms_sqlmap_string is:%s" % tor_forms_sqlmap_string)
 			os.system("/usr/bin/python2.7 %s" % tor_sqlmap_string)
 			os.system("/usr/bin/python2.7 %s" % tor_forms_sqlmap_string)
+
 	if num==5:
 		print('''attention!!!
 once you choosed this function, make sure your "targets.txt" file has urls 
@@ -146,15 +163,17 @@ but not xxx.xxx.xxx without url.scheme''')
 input your number here:''',end='')
 		num=int(input())
 		if num==1:
-			mysqlmap.sqlmap_craw("targets.txt",bool_tor)
+			mysqlmap.sqlmap_craw("targets.txt",bool_tor,post_or_not)
 		if num==2:
-			mysqlmap.sqlmap_g_nohuman("targets.txt",bool_tor)
+			mysqlmap.sqlmap_g_nohuman("targets.txt",bool_tor,post_or_not)
 		if num==3:
-			mysqlmap.sqlmap_g_human("targets.txt",bool_tor)
+			mysqlmap.sqlmap_g_human("targets.txt",bool_tor,post_or_not)
 		elif num!=1 and num!=2 and num!=3:
 			print("choose number wrong")
 
 
+
+
 		pass
 	os.system('/usr/bin/python2.7 mail.py')
-	os.system('''mv -f ~/.sqlmap/output_bak/* ~/.sqlmap/output''')
+	os.system('''mv -f /root/.sqlmap/output_bak/* /root/.sqlmap/output''')
