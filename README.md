@@ -63,6 +63,9 @@ MyToolKit
     链接:https://forum.90sec.org/forum.php?mod=viewthread&tid=9024 百度网盘链接
     http://pan.baidu.com/s/1kUklzZD 密码: 4cpn
 
+###2016.7.06部分代码更新：
+    增加扫描前检测是否连接vpn
+    
 ###2016.6.24部分代码更新：
     更新可以选择不进行post注入，加快sqli检测速度
 
