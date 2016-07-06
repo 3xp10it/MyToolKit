@@ -10,6 +10,28 @@
 import os
 import re 
 import mysqlmap
+import time
+
+#该函数功能：检测当前系统vpn是否开启
+def checkvpn():
+    import os
+    import re
+    #windows:-n 2
+    #linux:-c 2
+    a='ping www.google.com.hk -c 2'
+    r=os.popen(a)
+    output=r.readlines()
+    #print output
+    output="".join(output)
+    p=re.compile(r'ttl=',re.I)
+    if p.findall(output):
+        #print "ok"
+        return 1
+    else:
+        return 0
+
+
+
 while(True):	
 	print('''do you want use 'tor' service in your sqli action? sometimes when your network is not very well,
 is not a good idea to use tor,but when your targets has waf,use tor is better.
@@ -69,29 +91,54 @@ otherwise you need to change the source code :>''',end='')
 input your number here:''',end='')
 		num=int(input())
 		if num==1:
-			os.system("/root/myenv2/bin/python3.5m my_GoogleScraper_bing_domain.py -f %s" % targets)
-			mysqlmap.sqlmap_craw("GoogleScraper_bing_origin_http_domain_url_list.txt",bool_tor,post_or_not)
-			try:
-				mysqlmap.sqlmap_craw("bing_origin_http_domain_url_list.txt",bool_tor,post_or_not)
-			except:
-				pass
+			while(1):
+				if checkvpn():
+					os.system("/root/myenv2/bin/python3.5m my_GoogleScraper_bing_domain.py -f %s" % targets)
+					mysqlmap.sqlmap_craw("GoogleScraper_bing_origin_http_domain_url_list.txt",bool_tor,post_or_not)
+					try:
+						mysqlmap.sqlmap_craw("bing_origin_http_domain_url_list.txt",bool_tor,post_or_not)
+					except:
+						pass
+				else:
+					time.sleep(1)
+					print("vpn is off,scan will continue till vpn is on")
+
+
+
 		if num==2:
-			os.system("/root/myenv2/bin/python3.5m my_GoogleScraper_bing_domain.py -f %s" % targets)
-			mysqlmap.sqlmap_g_nohuman("GoogleScraper_bing_http_domain_list.txt",bool_tor,post_or_not)
-			try:
-				mysqlmap.sqlmap_g_nohuman("bing_http_domain_list.txt",bool_tor,post_or_not)	
-			except:
-				pass
+			while(1):
+				if checkvpn():
+					os.system("/root/myenv2/bin/python3.5m my_GoogleScraper_bing_domain.py -f %s" % targets)
+					mysqlmap.sqlmap_g_nohuman("GoogleScraper_bing_http_domain_list.txt",bool_tor,post_or_not)
+					try:
+						mysqlmap.sqlmap_g_nohuman("bing_http_domain_list.txt",bool_tor,post_or_not)	
+					except:
+						pass
+				else:
+					time.sleep(1)
+					print("vpn is off,scan will continue till vpn is on")
+
+
+
+
 		if num==3:
-			print('''!!!attention:all firefox process will be kill after easy_search''',end='')
-			os.system("/root/myenv2/bin/python3.5m my_GoogleScraper_bing_domain.py -f %s" % targets)
-			print("1111111111111111111success here")
-			mysqlmap.sqlmap_g_human("GoogleScraper_bing_http_domain_list.txt",bool_tor,post_or_not)
-			print("2222222222222222222success here")
-			try:
-				mysqlmap.sqlmap_g_human("bing_http_domain_list.txt",bool_tor,post_or_not)
-			except:
-				pass
+			while(1):
+				if checkvpn():
+					print('''!!!attention:all firefox process will be kill after easy_search''',end='')
+					os.system("/root/myenv2/bin/python3.5m my_GoogleScraper_bing_domain.py -f %s" % targets)
+					print("1111111111111111111success here")
+					mysqlmap.sqlmap_g_human("GoogleScraper_bing_http_domain_list.txt",bool_tor,post_or_not)
+					print("2222222222222222222success here")
+					try:
+						mysqlmap.sqlmap_g_human("bing_http_domain_list.txt",bool_tor,post_or_not)
+					except:
+						pass
+				else:
+					time.sleep(1)
+					print("vpn is off,scan will continue till vpn is on")
+
+
+
 		elif num!=1 and num!=2 and num!=3:
 			print("choose number wrong")
 
@@ -107,21 +154,44 @@ input your number here:''',end='')
 input your number here:''',end='')
 		num=int(input())
 		if num==1:
-			os.system("/usr/bin/python2.7 my_bing_domains_v1_alone.py %s" % targets)
-			print('''os.system("/usr/bin/python2.7 my_bing_domains_v1_alone.py %s" % targets) execute.''')
-			mysqlmap.sqlmap_craw("bing_origin_http_domain_url_list.txt",bool_tor,post_or_not)
+			while(1):
+				if checkvpn():
+					os.system("/usr/bin/python2.7 my_bing_domains_v1_alone.py %s" % targets)
+					print('''os.system("/usr/bin/python2.7 my_bing_domains_v1_alone.py %s" % targets) execute.''')
+					mysqlmap.sqlmap_craw("bing_origin_http_domain_url_list.txt",bool_tor,post_or_not)
+				else:
+					time.sleep(1)
+					print("vpn is off,scan will continue till vpn is on")
+
 		if num==2:
-			os.system("/usr/bin/python2.7 my_bing_domains_v1_alone.py %s" % targets)
-			print("/usr/bin/python2.7 my_bing_domains_v1_alone.py -f %s" % targets)
-			print("8888888888888success here")
-			mysqlmap.sqlmap_g_nohuman("bing_http_domain_list.txt",bool_tor,post_or_not)
+			while(1):
+				if checkvpn():
+					os.system("/usr/bin/python2.7 my_bing_domains_v1_alone.py %s" % targets)
+					print("/usr/bin/python2.7 my_bing_domains_v1_alone.py -f %s" % targets)
+					print("8888888888888success here")
+					mysqlmap.sqlmap_g_nohuman("bing_http_domain_list.txt",bool_tor,post_or_not)
+				else:
+					time.sleep(1)
+					print("vpn is off,scan will continue till vpn is on")
+
+
+
 		if num==3:
-			os.system("/usr/bin/python2.7 my_bing_domains_v1_alone.py %s" % targets)
-			mysqlmap.sqlmap_g_human("bing_http_domain_list.txt",bool_tor,post_or_not)
+			while(1):
+				if checkvpn():
+					os.system("/usr/bin/python2.7 my_bing_domains_v1_alone.py %s" % targets)
+					mysqlmap.sqlmap_g_human("bing_http_domain_list.txt",bool_tor,post_or_not)
+				else:
+					time.sleep(1)
+					print("vpn is off,scan will continue till vpn is on")
+
+
 		elif num!=1 and num!=2 and num!=3:
 			print("choose number wrong")
 
-		pass
+
+
+
 	if num==4:
 		print('''input your keyword you want google to search>''',end='')
 		keyword=input()
@@ -141,13 +211,25 @@ input your number here:''',end='')
 		if bool_tor==False:
 			print("sqlmap_string is:%s" % sqlmap_string)
 			print("forms_sqlmap_string is:%s" % forms_sqlmap_string)
-			os.system("/usr/bin/python2.7 %s" % sqlmap_string)
-			os.system("/usr/bin/python2.7 %s" % forms_sqlmap_string)
+			while(1):
+				if checkvpn():
+					os.system("/usr/bin/python2.7 %s" % sqlmap_string)
+					os.system("/usr/bin/python2.7 %s" % forms_sqlmap_string)
+				else:
+					time.sleep(1)
+					print("vpn is off,scan will continue till vpn is on")
+
 		elif bool_tor==True:
 			print("tor_sqlmap_string is:%s" % tor_sqlmap_string)
 			print("tor_forms_sqlmap_string is:%s" % tor_forms_sqlmap_string)
-			os.system("/usr/bin/python2.7 %s" % tor_sqlmap_string)
-			os.system("/usr/bin/python2.7 %s" % tor_forms_sqlmap_string)
+			while(1):
+				if checkvpn():
+					os.system("/usr/bin/python2.7 %s" % tor_sqlmap_string)
+					os.system("/usr/bin/python2.7 %s" % tor_forms_sqlmap_string)
+				else:
+					time.sleep(1)
+					print("vpn is off,scan will continue till vpn is on")
+
 
 	if num==5:
 		print('''attention!!!
@@ -163,17 +245,32 @@ but not xxx.xxx.xxx without url.scheme''')
 input your number here:''',end='')
 		num=int(input())
 		if num==1:
-			mysqlmap.sqlmap_craw("targets.txt",bool_tor,post_or_not)
+			while(1):
+				if checkvpn():
+					mysqlmap.sqlmap_craw("targets.txt",bool_tor,post_or_not)
+				else:
+					time.sleep(1)
+					print("vpn is off,scan will continue till vpn is on")
+
+
 		if num==2:
-			mysqlmap.sqlmap_g_nohuman("targets.txt",bool_tor,post_or_not)
+			while(1):
+				if checkvpn():
+					mysqlmap.sqlmap_g_nohuman("targets.txt",bool_tor,post_or_not)
+				else:
+					time.sleep(1)
+					print("vpn is off,scan will continue till vpn is on")
+			
 		if num==3:
-			mysqlmap.sqlmap_g_human("targets.txt",bool_tor,post_or_not)
+			while(1):
+				if checkvpn():
+					mysqlmap.sqlmap_g_human("targets.txt",bool_tor,post_or_not)
+				else:
+					time.sleep(1)
+					print("vpn is off,scan will continue till vpn is on")
+			
 		elif num!=1 and num!=2 and num!=3:
 			print("choose number wrong")
 
-
-
-
-		pass
 	os.system('/usr/bin/python2.7 mail.py')
 	os.system('''mv -f /root/.sqlmap/output_bak/* /root/.sqlmap/output''')
