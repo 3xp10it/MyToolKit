@@ -12,6 +12,7 @@ MyToolKit
 
 2.各模块介绍：
 ------------
+
 ###1>easy_search.py:
 
             google关键字搜索相关网页结果，并对结果通过sqlmap注入，类似啊D里的搜索注入功能，但比啊D里强大，因为这里用sqlmap检测注入并注入,其中google搜索的
@@ -59,6 +60,7 @@ MyToolKit
 
 3.环境要求： 
 ------------
+
     安装GoogleScraper（python3下），并修改部分GoogleScraper中第三方模块selenium中代码(绕过验证码)可参考以前一篇写的关于google search api for python的文章90sec
     链接:https://forum.90sec.org/forum.php?mod=viewthread&tid=9024 百度网盘链接
     http://pan.baidu.com/s/1kUklzZD 密码: 4cpn
